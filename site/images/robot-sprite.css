@@ -1,0 +1,129 @@
+/* ===========================================
+   ROBOT - Walks to center, points at CTA
+   =========================================== */
+
+.robot-container {
+  position: fixed;
+  bottom: 100px;
+  z-index: 1000;
+  right: -200px;
+  transition: right 3s ease-out;
+}
+
+.robot-container.walking {
+  right: calc(50% - 65px); /* Center of screen */
+}
+
+.robot {
+  position: relative;
+  cursor: pointer;
+}
+
+.robot-img {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.2));
+  animation: walkBounce 0.35s ease-in-out infinite;
+}
+
+@keyframes walkBounce {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+.robot-container.arrived .robot-img {
+  animation: gentleFloat 2s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Speech bubble pointing LEFT toward CTA */
+.robot-speech {
+  position: absolute;
+  top: 30px;
+  left: -140px;
+  background: linear-gradient(135deg, #FF6B35, #FF8C42);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-family: "Nunito", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* Arrow pointing LEFT */
+.robot-speech::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  transform: translateY(-50%);
+  border: 12px solid transparent;
+  border-left-color: #FF8C42;
+  border-right: 0;
+}
+
+.robot-container.arrived .robot-speech {
+  animation: popIn 0.4s ease-out 0.3s forwards;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0); }
+  70% { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Pointing arrow toward LEFT */
+.point-arrow {
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  opacity: 0;
+}
+
+.robot-container.arrived .point-arrow {
+  animation: showArrow 0.3s ease-out 0.5s forwards, bounceArrow 0.8s ease-in-out 0.8s infinite;
+}
+
+@keyframes showArrow {
+  to { opacity: 1; }
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-50%) translateX(-10px); }
+}
+
+/* CTA glow */
+.btn-primary.glow {
+  animation: ctaGlow 1.5s ease-in-out infinite !important;
+}
+
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4); }
+  50% { box-shadow: 0 12px 50px rgba(255, 107, 53, 0.7), 0 0 25px rgba(255, 107, 53, 0.4); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .robot-img { width: 100px; height: 100px; }
+  .robot-container.walking { right: calc(50% - 50px); }
+  .robot-speech { font-size: 12px; left: -120px; }
+}
+
+@media (max-width: 480px) {
+  .robot-img { width: 80px; height: 80px; }
+  .robot-container.walking { right: calc(50% - 40px); }
+  .robot-speech { display: none; }
+  .point-arrow { left: -25px; font-size: 1.5rem; }
+}

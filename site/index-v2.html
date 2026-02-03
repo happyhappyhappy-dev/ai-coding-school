@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Coding School | Free Trial Class</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #13233b;
+      --muted: #4d5c73;
+      --accent: #3b82f6;
+      --accent-soft: #e6f0ff;
+      --card: #ffffff;
+      --border: #e5edf8;
+      --bg: #f8fbff;
+      --shadow: 0 20px 40px rgba(19, 35, 59, 0.08);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Sora", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(59, 130, 246, 0.08), transparent 50%),
+        radial-gradient(circle at 88% 18%, rgba(14, 165, 233, 0.07), transparent 45%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      padding: 48px 0 32px;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 32px;
+    }
+
+    .hero-visual {
+      background: linear-gradient(135deg, #f0f6ff, #ffffff);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-visual::before,
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.12);
+      filter: blur(0.5px);
+      z-index: 0;
+    }
+
+    .hero-visual::before {
+      width: 180px;
+      height: 180px;
+      top: -60px;
+      left: -50px;
+    }
+
+    .hero-visual::after {
+      width: 140px;
+      height: 140px;
+      bottom: -50px;
+      right: -30px;
+      background: rgba(14, 165, 233, 0.14);
+    }
+
+    .visual-stack {
+      width: 100%;
+      display: grid;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .visual-emojis {
+      display: flex;
+      gap: 10px;
+      font-size: 1.6rem;
+    }
+
+    .visual-card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 24px rgba(19, 35, 59, 0.06);
+      display: grid;
+      gap: 10px;
+    }
+
+    .code-line {
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.05));
+    }
+
+    .code-line.short { width: 60%; }
+    .code-line.medium { width: 80%; }
+    .code-line.long { width: 100%; }
+
+    .hero-copy h1 {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(2.1rem, 5vw, 3.1rem);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 34ch;
+      margin-bottom: 20px;
+    }
+
+    .hero-actions {
+      display: grid;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 16px 30px rgba(59, 130, 246, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:focus-visible,
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 34px rgba(59, 130, 246, 0.3);
+    }
+
+    #calendly-embed {
+      min-height: 320px;
+      border: 1.5px dashed rgba(59, 130, 246, 0.35);
+      border-radius: var(--radius-md);
+      background: var(--accent-soft);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 0.98rem;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .section {
+      padding: 28px 0;
+    }
+
+    .section-title {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+    }
+
+    .small-text {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-card {
+      background: white;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: grid;
+      gap: 6px;
+      font-size: 0.95rem;
+    }
+
+    .step span {
+      font-family: "JetBrains Mono", monospace;
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+
+    .quote {
+      border-left: 3px solid var(--accent);
+      padding-left: 14px;
+      display: grid;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .quote strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      background: white;
+    }
+
+    details + details {
+      margin-top: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--ink);
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      margin-top: 8px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .reveal.delay-1 { animation-delay: 0.1s; }
+    .reveal.delay-2 { animation-delay: 0.2s; }
+    .reveal.delay-3 { animation-delay: 0.3s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        padding: 72px 0 48px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 48px;
+      }
+
+      .hero-copy {
+        order: 2;
+      }
+
+      .hero-visual {
+        order: 1;
+        min-height: 360px;
+      }
+
+      .hero-actions {
+        max-width: 420px;
+      }
+
+      #calendly-embed {
+        min-height: 360px;
+      }
+
+      .section {
+        padding: 34px 0;
+      }
+
+      .card-grid,
+      .steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1080px) {
+      .card-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .steps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-visual reveal delay-1" aria-hidden="true">
+          <div class="visual-stack">
+            <div class="visual-emojis">🤖 🎨 🧩</div>
+            <div class="visual-card">
+              <div class="code-line long"></div>
+              <div class="code-line medium"></div>
+              <div class="code-line short"></div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-copy reveal delay-2">
+          <h1>Your kid learns to code with personalized AI + human tutors</h1>
+          <p>Friendly 1:1 sessions tailored to their pace and interests. Start with a free trial class.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#calendly-embed">Book Free Trial</a>
+            <div id="calendly-embed">Calendly embed goes here.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">What subjects?</h2>
+        <div class="card-grid">
+          <div class="mini-card">Scratch &amp; block coding for beginners</div>
+          <div class="mini-card">Python fundamentals and projects</div>
+          <div class="mini-card">Web design: HTML, CSS, and creativity</div>
+          <div class="mini-card">AI-powered creative builds and games</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <div class="steps">
+          <div class="step">
+            <span>STEP 01</span>
+            <div>Book a free trial and share your kid’s interests.</div>
+          </div>
+          <div class="step">
+            <span>STEP 02</span>
+            <div>We match them with a tutor and a learning plan.</div>
+          </div>
+          <div class="step">
+            <span>STEP 03</span>
+            <div>Weekly sessions build real projects with guidance.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Parents say</h2>
+        <div class="quote">
+          <p>“My daughter went from zero to building her own game in a month.”</p>
+          <strong>— Jamie, parent of a 10-year-old</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">FAQ</h2>
+        <details>
+          <summary>What ages do you teach?</summary>
+          <p>Most students are 7–16. We adjust the pace and tools to fit their level.</p>
+        </details>
+        <details>
+          <summary>Do we need experience or devices?</summary>
+          <p>No experience needed. A laptop or desktop with internet is perfect.</p>
+        </details>
+        <details>
+          <summary>How long are sessions?</summary>
+          <p>Trial classes are 45 minutes. Ongoing sessions are typically 45–60 minutes.</p>
+        </details>
+        <details>
+          <summary>Is it 1:1 or group?</summary>
+          <p>It’s 1:1 by default. We can also set up small sibling groups.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
